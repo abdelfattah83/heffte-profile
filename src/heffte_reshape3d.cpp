@@ -268,7 +268,7 @@ void reshape3d_alltoall<location_tag, packer, index>::apply_base(int batch_size,
     }
     #endif
 
-    { add_trace name("all2all");
+    { add_trace name("all2all" + std::to_string(batch_size * num_entries));
         MPI_Alltoall(send_buffer, batch_size * num_entries, mpi::type_from<scalar_type>(),
                      recv_buffer, batch_size * num_entries, mpi::type_from<scalar_type>(),
                      comm);
